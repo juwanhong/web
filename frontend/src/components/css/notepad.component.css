@@ -1,0 +1,20 @@
+.DrawArea {
+	width: 800px;
+	height: 800px;
+	border: 1px solid black;
+	float: left;
+	cursor: crosshair;
+}
+
+.path {
+	fill: none;
+	stroke-width: 5px;
+	stroke: blue;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+
+.drawing {
+	width: 800px;
+	height: 800px;
+}
