@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Immutable from 'immutable';
-import htmlToImage from 'html-to-image';
+import saveSvgAsPng from 'save-svg-as-png';
 
 import './css/notepad.component.css'
 
@@ -111,15 +111,6 @@ function DrawingLine({ line }) {
         }).join(" L ");
     return <path className="path" d={pathData} />
 }
-
-
-// function convertToText() {
-// 	var node = React.findDOMNode(this.refs.drawArea);
-// 	htmlToImage.toPng(node).then(
-// 		function () {
-// 			console.log('inside convertToText');
-// 		})
-// }
 
 
 

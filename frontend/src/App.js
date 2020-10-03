@@ -12,6 +12,10 @@ import Resume from "./components/resume.component";
 import CreateNote from "./components/create-note.component";
 import ListNote from "./components/list-note.component";
 
+import Register from "./components/register.component";
+import Login from "./components/login.component";
+
+
 class App extends Component {
     render() {
         return (
@@ -35,6 +39,12 @@ class App extends Component {
                     <li className="navbar-item">
                       <Link to="/list-note" className="nav-link">List Notes</Link>
                     </li>
+                    <li className="navbar-item">
+                      <Link to="/login" className="nav-link">Login</Link>
+                    </li>
+                    <li className="navbar-item">
+                      <Link to="/register" className="nav-link">Register</Link>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -42,6 +52,8 @@ class App extends Component {
               <Route path="/resume" component={Resume}></Route>
               <Route path="/create-note" component={CreateNote}></Route>
               <Route path="/list-note" component={ListNote}></Route>
+              <Route path="/login" component={Login}></Route>
+              <Route path="/register" component={Register}></Route>
             </div>
           </Router>
         )

@@ -4,12 +4,14 @@ var User = require("./user.model");
 
 var noteSchema = new mongoose.Schema({
 	title: String,
-	image: {
-		data: Buffer,
-		contentType: String},
+	image: String,
 	text: String,
 	date: Date,
-	username: String
+	username: String,
+	imgpng: {
+		data: Buffer,
+		contentType: String
+	}
 })
 
 

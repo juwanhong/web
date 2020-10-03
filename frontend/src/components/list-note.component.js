@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import CanvasDraw from 'react-canvas-draw'
+
 
 const Note = props => (
     <tr>
@@ -8,6 +10,7 @@ const Note = props => (
 		<td>{props.note.username}</td>
 		<td>{props.note.text}</td>
 		<td>{props.note.date.substring(0,10)}</td>
+		<td><CanvasDraw ref={canvasDraw => (ListNote.loadableCanvas = canvasDraw)} disabled hideGrid saveData={props.note.image} /></td>
 		<td>
      	<Link to={"/edit/"+props.note._id}>edit</Link> | <a href="#" onClick={() => { props.deleteNote(props.note._id) }}>delete</a>
     	</td>
@@ -41,9 +44,17 @@ export default class ListNote extends Component {
     }
 
     listNote() {
+    	// this.loadCanvas()
+    	console.log(this.state.notes)
     	return this.state.notes.map(curNote => {
-    		return <Note note={curNote} deleteNote={this.deleteNote} key={curNote._id}/>;
+    		return (
+    			<Note note={curNote} deleteNote={this.deleteNote} key={curNote._id} load={this.loadCanvas}/>
+    				)
     	})
+    }
+
+    loadCanvas() {
+    	this.loadableCanvas.loadSaveData(this.state.notes.image)
     }
 
     render() {
@@ -57,6 +68,7 @@ export default class ListNote extends Component {
     						<th>Username</th>
     						<th>Text</th>
     						<th>Date</th>
+    						<th>Image</th>
     					</tr>
     				</thead>
     				<tbody>

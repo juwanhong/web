@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "babel": "^6.23.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.2",
     "html-to-image": "^0.1.1",
     "husky": "^4.3.0",
@@ -17,11 +18,14 @@
     "paper": "^0.12.11",
     "prettier": "^2.1.1",
     "react": "^16.13.1",
+    "react-canvas-draw": "^1.1.1",
     "react-dom": "^16.13.1",
+    "react-drawable-canvas": "^1.1.1",
     "react-native": "^0.63.2",
     "react-pdf": "^5.0.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "save-svg-as-png": "^1.4.17"
   },
   "scripts": {
     "start": "react-scripts start",
