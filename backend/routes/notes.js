@@ -26,14 +26,16 @@ const tesseract_config = {
 }
 
 router.route('/').get((req, res) => {
-	Note.find()
+	console.log(req.user.username)
+	Note.find({username: req.user.username}).exec()
 		.then(notes => res.json(notes))
 		.catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.route('/add').post(upload.single('imgpng'), (req, res) => {
+	console.log(req.user.username)
 	const title = req.body.title;
-	const username = req.body.username;
+	const username = req.user.username;
 	const text = req.body.text;
 	const date = Date.parse(new Date());
 	const image = req.body.image;

@@ -36,15 +36,15 @@ userSchema.methods = {
 	}
 }
 
-userSchema.pre('save', (next) => {
-	// if (!this.password) {
-	// 	console.log('no password provided');
-	// 	next();
-	// } else {
+userSchema.pre('save', function(next) {
+	if (!this.password) {
+		console.log('no password provided');
+		next();
+	} else {
 		console.log('hashPassword in pre save');
 		this.password = this.hashPassword(this.password);
 		next();
-	// }
+	}
 })
 
 userSchema.plugin(passportLocalMongoose);

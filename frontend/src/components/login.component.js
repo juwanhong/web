@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import axios from 'axios';
 
 // import LoginService from '../services/LoginService';
+import ListNote from "./list-note.component";
+
 
 export default class Login extends Component {
     constructor(props) {
@@ -13,8 +15,13 @@ export default class Login extends Component {
             username: '',
             password: '',
             loginSuccess: false,
-            error: ''
+            error: '',
+            redirectTo: '',
         };
+    }
+
+    componentWillUnmount() {
+    	console.log('login unmount')
     }
 
     handleOnChangeUsername = e => {
@@ -34,24 +41,23 @@ export default class Login extends Component {
     		username: this.state.username,
     		password: this.state.password,
     	};
+    	console.log(data)
 
-    	axios.post('http://localhost:5000/login', {
+    	axios.post('http://192.168.0.22:5000/auth/login', {
     		username: this.state.username,
     		password: this.state.password
-    	})
+    	},{withCredentials: false})
     		.then(res => {
                 console.log('login response: ')
                 console.log(res)
                 if (res.status === 200) {
                     // update App.js state
-                    this.props.updateUser({
-                        loggedIn: true,
-                        username: res.data.username
-                    })
-                    // update the state to redirect to home
                     this.setState({
-                        redirectTo: '/'
+                        loginSuccess: true,
+                        username: res.data.username,
+                        redirectTo: '/list-notes'
                     })
+                    console.log(this.state.username)
                 }
             }).catch(error => {
                 console.log('login error: ')
@@ -82,9 +88,11 @@ export default class Login extends Component {
     }
 
     render() {
-    	const {loginSuccess, error} = this.state;
-    	if(loginSuccess) {
-    		return <Redirect to={{pathname: '/'}} />
+    	if(this.state.loginSuccess) {
+    		return (
+    			<Redirect to={this.state.redirectTo} />
+    			// <Route path="/list-note" component={ListNote}/>
+    			)
     	}
     	return (
     		<div className="Login">
@@ -106,10 +114,4 @@ export default class Login extends Component {
     	)
     }
 
-}
-
-const LoginService = data => {
-	console.log(data);
-	axios.post('http://localhost:5000/login', data)
-		.then(res => res.status)
 }

@@ -35,7 +35,7 @@ export default class Register extends Component {
 
     	// const registerStatus = await UserRegister(data);
 
-    	axios.post('http://localhost:5000/register', {
+    	axios.post('http://192.168.0.22:5000/auth/register', {
     		username: this.state.username,
     		password: this.state.password,
     		email: this.state.email
@@ -45,7 +45,7 @@ export default class Register extends Component {
 				if (!res.data.err) {
 					console.log('successful signup')
 					this.setState({ //redirect to login page
-						redirectTo: '/login'
+						redirectTo: '/auth/login'
 					})
 				} else {
 					console.log('username already taken')
@@ -103,34 +103,4 @@ export default class Register extends Component {
     		</div>
     	)
     }
-}
-
-export const UserRegister = data => {
-
-	axios.post('http://localhost:5000/register', data)
-		.then(res => {
-				console.log(res)
-				if (!res.data.err) {
-					console.log('successful signup')
-					this.setState({ //redirect to login page
-						redirectTo: '/login'
-					})
-				} else {
-					console.log('username already taken')
-				}
-			}).catch(error => {
-				console.log('signup error: ')
-				console.log(error)
-
-			})
-}
-
-export const UsernameValidate = data => {
-	axios.post('http://localhost:5000/register/validateUsername', data)
-		.then(exist => exist.status);
-}
-
-export const EmailValidate = data => {
-	axios.post('http://localhost:5000/register/validateEmail', data)
-		.then(exist => exist.status);
 }
